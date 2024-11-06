@@ -1,0 +1,84 @@
+{% extends "form_base.html" %}
+
+{% block title %}Hệ thống Tuyển dụng HR{% endblock %}
+
+{% block modal_title %}Xác nhận{% endblock %}
+{% block confirm_button %}Xác nhận{% endblock %}
+{% block cancel_button %}Hủy bỏ{% endblock %}
+
+{% block content %}
+    <!-- Basic Information -->
+    <section class="form-section">
+        <h2>Thông tin cơ bản</h2>
+        
+        <!-- Name Fields -->
+        <div class="form-group">
+            <label>Họ (Romaji) *</label>
+            <input type="text" name="surname_romaji" required>
+        </div>
+        <div class="form-group">
+            <label>Tên (Romaji) *</label>
+            <input type="text" name="givenname_romaji" required>
+        </div>
+
+        <!-- Email -->
+        <div class="form-group">
+            <label>Địa chỉ email *</label>
+            <input type="email" name="email" required>
+        </div>
+
+        <!-- Birth Date -->
+        <div class="form-group">
+            <label>Ngày sinh *</label>
+            <input type="date" name="birthdate" required>
+        </div>
+
+        <!-- Gender -->
+        <div class="form-group">
+            <label>Giới tính *</label>
+            <select name="gender" required>
+                <option value="">Vui lòng chọn</option>
+                <option value="male">Nam</option>
+                <option value="female">Nữ</option>
+            </select>
+        </div>
+
+        <!-- Nationality -->
+        <div class="form-group">
+            <label>Quốc tịch *</label>
+            <select name="nationality" required>
+                <option value="">Vui lòng chọn</option>
+                <option value="Mongolia">Mông Cổ</option>
+                <option value="Vietnam">Việt Nam</option>
+                <option value="Other">Khác</option>
+            </select>
+        </div>
+
+        <!-- Phone -->
+        <div class="form-group">
+            <label>Số điện thoại di động *</label>
+            <input type="tel" name="mobile_phone" required>
+        </div>
+    </section>
+
+    <!-- Japanese Level -->
+    <section class="form-section">
+        <h2>Trình độ tiếng Nhật</h2>
+        <div class="form-group">
+            <label>Cấp độ tiếng Nhật *</label>
+            <select name="japanese_level" required>
+                <option value="">Vui lòng chọn</option>
+                <option value="n1">N1</option>
+                <option value="n2">N2</option>
+                <option value="n3">N3</option>
+                <option value="n4">N4</option>
+                <option value="n5">N5</option>
+            </select>
+        </div>
+    </section>
+
+    <!-- Submit Button -->
+    <section class="form-section submit-section">
+        <button type="submit" class="submit-btn">Gửi</button>
+    </section>
+{% endblock %}

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}HR Recruitment System{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <form id="recruitmentForm" enctype="multipart/form-data">
+            {% block content %}{% endblock %}
+        </form>
+    </div>
+
+    <!-- Review Modal -->
+    <div id="reviewModal" class="modal">
+        <div class="modal-content">
+            <h2>{% block modal_title %}Confirm{% endblock %}</h2>
+            <div id="reviewContent"></div>
+            <div class="modal-buttons">
+                <button id="confirmSubmit">{% block confirm_button %}Confirm{% endblock %}</button>
+                <button id="cancelSubmit">{% block cancel_button %}Cancel{% endblock %}</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>

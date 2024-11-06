@@ -1,0 +1,84 @@
+{% extends "form_base.html" %}
+
+{% block title %}HR採用システム{% endblock %}
+
+{% block modal_title %}確認{% endblock %}
+{% block confirm_button %}確定{% endblock %}
+{% block cancel_button %}キャンセル{% endblock %}
+
+{% block content %}
+    <!-- Basic Information -->
+    <section class="form-section">
+        <h2>基本情報</h2>
+        
+        <!-- Name Fields -->
+        <div class="form-group">
+            <label>姓（ローマ字）*</label>
+            <input type="text" name="surname_romaji" required>
+        </div>
+        <div class="form-group">
+            <label>名（ローマ字）*</label>
+            <input type="text" name="givenname_romaji" required>
+        </div>
+
+        <!-- Email -->
+        <div class="form-group">
+            <label>メールアドレス *</label>
+            <input type="email" name="email" required>
+        </div>
+
+        <!-- Birth Date -->
+        <div class="form-group">
+            <label>生年月日 *</label>
+            <input type="date" name="birthdate" required>
+        </div>
+
+        <!-- Gender -->
+        <div class="form-group">
+            <label>性別 *</label>
+            <select name="gender" required>
+                <option value="">選択してください</option>
+                <option value="male">男性</option>
+                <option value="female">女性</option>
+            </select>
+        </div>
+
+        <!-- Nationality -->
+        <div class="form-group">
+            <label>国籍 *</label>
+            <select name="nationality" required>
+                <option value="">選択してください</option>
+                <option value="Mongolia">モンゴル</option>
+                <option value="Vietnam">ベトナム</option>
+                <option value="Other">その他</option>
+            </select>
+        </div>
+
+        <!-- Phone -->
+        <div class="form-group">
+            <label>携帯電話番号 *</label>
+            <input type="tel" name="mobile_phone" required>
+        </div>
+    </section>
+
+    <!-- Japanese Level -->
+    <section class="form-section">
+        <h2>日本語能力</h2>
+        <div class="form-group">
+            <label>日本語レベル *</label>
+            <select name="japanese_level" required>
+                <option value="">選択してください</option>
+                <option value="n1">N1</option>
+                <option value="n2">N2</option>
+                <option value="n3">N3</option>
+                <option value="n4">N4</option>
+                <option value="n5">N5</option>
+            </select>
+        </div>
+    </section>
+
+    <!-- Submit Button -->
+    <section class="form-section submit-section">
+        <button type="submit" class="submit-btn">送信</button>
+    </section>
+{% endblock %}
