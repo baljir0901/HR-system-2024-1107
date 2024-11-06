@@ -1,84 +1,503 @@
 {% extends "form_base.html" %}
 
-{% block title %}Hệ thống Tuyển dụng HR{% endblock %}
-
-{% block modal_title %}Xác nhận{% endblock %}
-{% block confirm_button %}Xác nhận{% endblock %}
-{% block cancel_button %}Hủy bỏ{% endblock %}
+{% block title %}Personal Survey Form (Đơn xin việc){% endblock %}
 
 {% block content %}
+    <!-- Declaration -->
+    <div class="form-notice">
+        <p>申告内容に嘘や誤りがないことを確認します。虚偽が発覚した場合はいかなる処分も受け入れます。
+        (Tôi xác nhận rằng không có thông tin sai lệch hoặc gian dối trong nội dung khai báo này.
+        Nếu phát hiện gian dối, tôi sẽ chấp nhận mọi hình thức xử lý.)</p>
+    </div>
+
     <!-- Basic Information -->
     <section class="form-section">
-        <h2>Thông tin cơ bản</h2>
-        
-        <!-- Name Fields -->
+        <h2>基本情報 (Thông tin cơ bản)</h2>
         <div class="form-group">
-            <label>Họ (Romaji) *</label>
-            <input type="text" name="surname_romaji" required>
+            <label for="name">氏名 (Họ và tên) *</label>
+            <input type="text" id="name" name="name" required>
         </div>
         <div class="form-group">
-            <label>Tên (Romaji) *</label>
-            <input type="text" name="givenname_romaji" required>
+            <label for="furigana">フリガナ (Cách đọc)</label>
+            <input type="text" id="furigana" name="furigana">
         </div>
-
-        <!-- Email -->
         <div class="form-group">
-            <label>Địa chỉ email *</label>
-            <input type="email" name="email" required>
+            <label for="romaji">ローマ字 (Chữ La-tinh) *</label>
+            <input type="text" id="romaji" name="romaji" required>
         </div>
-
-        <!-- Birth Date -->
-        <div class="form-group">
-            <label>Ngày sinh *</label>
-            <input type="date" name="birthdate" required>
+        <div class="form-row">
+            <div class="form-group">
+                <label for="dob">生年月日 (Ngày tháng năm sinh) *</label>
+                <input type="date" id="dob" name="dob" required>
+            </div>
+            <div class="form-group">
+                <label for="age">年齢 (Tuổi) *</label>
+                <input type="number" id="age" name="age" required>
+            </div>
         </div>
-
-        <!-- Gender -->
         <div class="form-group">
-            <label>Giới tính *</label>
-            <select name="gender" required>
-                <option value="">Vui lòng chọn</option>
-                <option value="male">Nam</option>
-                <option value="female">Nữ</option>
+            <label for="gender">性別 (Giới tính) *</label>
+            <select id="gender" name="gender" required>
+                <option value="">選択 (Chọn)</option>
+                <option value="male">男性 (Nam)</option>
+                <option value="female">女性 (Nữ)</option>
             </select>
         </div>
-
-        <!-- Nationality -->
         <div class="form-group">
-            <label>Quốc tịch *</label>
-            <select name="nationality" required>
-                <option value="">Vui lòng chọn</option>
-                <option value="Mongolia">Mông Cổ</option>
-                <option value="Vietnam">Việt Nam</option>
-                <option value="Other">Khác</option>
-            </select>
+            <label for="family">家族構成 (Thành phần gia đình)</label>
+            <textarea id="family" name="family_structure"></textarea>
         </div>
-
-        <!-- Phone -->
         <div class="form-group">
-            <label>Số điện thoại di động *</label>
-            <input type="tel" name="mobile_phone" required>
+            <label for="nationality">国籍 (Quốc tịch) *</label>
+            <input type="text" id="nationality" name="nationality" required>
+        </div>
+        <div class="form-group">
+            <label for="station">最寄駅 (Ga gần nhất)</label>
+            <input type="text" id="station" name="nearest_station">
+        </div>
+        <div class="form-group">
+            <label for="address">現住所 (Địa chỉ hiện tại) 〒</label>
+            <input type="text" id="postal" name="postal_code" placeholder="郵便番号 (Mã bưu điện)">
+            <textarea id="address" name="address"></textarea>
         </div>
     </section>
 
-    <!-- Japanese Level -->
+    <!-- Contact Information -->
     <section class="form-section">
-        <h2>Trình độ tiếng Nhật</h2>
+        <h2>連絡先 (Thông tin liên lạc)</h2>
         <div class="form-group">
-            <label>Cấp độ tiếng Nhật *</label>
-            <select name="japanese_level" required>
-                <option value="">Vui lòng chọn</option>
-                <option value="n1">N1</option>
-                <option value="n2">N2</option>
-                <option value="n3">N3</option>
-                <option value="n4">N4</option>
-                <option value="n5">N5</option>
+            <label for="mobile">携帯電話 (Điện thoại di động) *</label>
+            <input type="tel" id="mobile" name="mobile_phone" required>
+        </div>
+        <div class="form-group">
+            <label for="email">メールアドレス (Địa chỉ email) *</label>
+            <input type="email" id="email" name="email" required>
+        </div>
+        <div class="form-group">
+            <label for="facebook">Facebook (Facebook)</label>
+            <input type="text" id="facebook" name="facebook">
+        </div>
+        <div class="form-group">
+            <label for="line">LINE (LINE)</label>
+            <input type="text" id="line" name="line">
+        </div>
+        <div class="form-group">
+            <label for="page">Page Name (Tên trang)</label>
+            <input type="text" id="page" name="page_name">
+        </div>
+    </section>
+
+    <!-- Interview Availability -->
+    <section class="form-section">
+        <h2>面接可能時間 (Thời gian có thể phỏng vấn)</h2>
+        <div class="form-group">
+            <label for="choice1">1番目の選択 (Lựa chọn thứ nhất) *</label>
+            <input type="datetime-local" id="choice1" name="interview_choice1" required>
+        </div>
+        <div class="form-group">
+            <label for="choice2">2番目の選択 (Lựa chọn thứ hai)</label>
+            <input type="datetime-local" id="choice2" name="interview_choice2">
+        </div>
+        <div class="form-group">
+            <label for="choice3">3番目の選択 (Lựa chọn thứ ba)</label>
+            <input type="datetime-local" id="choice3" name="interview_choice3">
+        </div>
+        <div class="form-group">
+            <label for="resignation">予期退職日 (Ngày dự định nghỉ việc)</label>
+            <input type="date" id="resignation" name="expected_resignation_date">
+        </div>
+        <div class="form-group">
+            <label for="jobchange">予期職務変更日 (Ngày dự định thay đổi công việc)</label>
+            <input type="date" id="jobchange" name="expected_job_change_date">
+        </div>
+        <div class="form-group">
+            <label for="salary">月給 技術職員として (Lương tháng với tư cách là nhân viên kỹ thuật)</label>
+            <input type="number" id="salary" name="monthly_salary">
+        </div>
+    </section>
+
+    <!-- Education -->
+    <section class="form-section">
+        <h2>1. 学歴 (Học vấn)</h2>
+        <div class="education-entry">
+            <div class="form-group">
+                <label for="enroll">入学日 (Ngày nhập học) *</label>
+                <input type="date" id="enroll" name="enrollment_date" required>
+            </div>
+            <div class="form-group">
+                <label for="graduate">卒業日 (Ngày tốt nghiệp) *</label>
+                <input type="date" id="graduate" name="graduation_date" required>
+            </div>
+            <div class="form-group">
+                <label for="school">学校名 (Tên trường) *</label>
+                <input type="text" id="school" name="school_name" required>
+            </div>
+            <div class="form-group">
+                <label for="department">学科 (Khoa/Ngành)</label>
+                <input type="text" id="department" name="department">
+            </div>
+        </div>
+        <button type="button" class="add-more">+ Thêm thông tin học vấn</button>
+    </section>
+
+    <!-- Employment History -->
+    <section class="form-section">
+        <h2>2. 職歴 (Kinh nghiệm làm việc)</h2>
+        <div class="employment-entry">
+            <div class="form-group">
+                <label for="join_date">入社日 (Ngày vào công ty) *</label>
+                <input type="date" id="join_date" name="joining_date" required>
+            </div>
+            <div class="form-group">
+                <label for="resign_date">退職日 (Ngày nghỉ việc) *</label>
+                <input type="date" id="resign_date" name="resignation_date" required>
+            </div>
+            <div class="form-group">
+                <label for="company">会社名 (Tên công ty) *</label>
+                <input type="text" id="company" name="company_name" required>
+            </div>
+            <div class="form-group">
+                <label for="job_desc">職務内容 / 退職理由 (Nội dung công việc / Lý do nghỉ việc)</label>
+                <textarea id="job_desc" name="job_description"></textarea>
+            </div>
+        </div>
+        <button type="button" class="add-more">+ Thêm kinh nghiệm làm việc</button>
+    </section>
+
+    <!-- Qualifications -->
+    <section class="form-section">
+        <h2>3. 資格 (Bằng cấp và chứng chỉ)</h2>
+        <div class="form-group">
+            <label for="qualification">資格 / 免許 (Bằng cấp / Giấy phép)</label>
+            <input type="text" id="qualification" name="qualification">
+        </div>
+        <div class="form-group">
+            <label for="qual_details">詳細 (Chi tiết)</label>
+            <textarea id="qual_details" name="qualification_details"></textarea>
+        </div>
+
+        <!-- Driver's Licenses -->
+        <div class="form-group">
+            <label>日本の運転免許 (Bằng lái xe Nhật Bản) (AT)</label>
+            <div class="radio-group">
+                <input type="radio" id="jp_license_yes" name="jp_license" value="yes">
+                <label for="jp_license_yes">Có</label>
+                <input type="radio" id="jp_license_no" name="jp_license" value="no">
+                <label for="jp_license_no">Không</label>
+            </div>
+        </div>
+        <div class="form-group">
+            <label>モンゴルの運転免許 (Bằng lái xe Mông Cổ)</label>
+            <div class="radio-group">
+                <input type="radio" id="mn_license_yes" name="mn_license" value="yes">
+                <label for="mn_license_yes">Có</label>
+                <input type="radio" id="mn_license_no" name="mn_license" value="no">
+                <label for="mn_license_no">Không</label>
+            </div>
+        </div>
+        <div class="form-group">
+            <label>ベトナムの運転免許 (Bằng lái xe Việt Nam)</label>
+            <div class="radio-group">
+                <input type="radio" id="vn_license_yes" name="vn_license" value="yes">
+                <label for="vn_license_yes">Có</label>
+                <input type="radio" id="vn_license_no" name="vn_license" value="no">
+                <label for="vn_license_no">Không</label>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="jp_prof">日本語能力 (Trình độ tiếng Nhật)</label>
+            <select id="jp_prof" name="japanese_proficiency">
+                <option value="">Chọn cấp độ</option>
+                <option value="N1">N1</option>
+                <option value="N2">N2</option>
+                <option value="N3">N3</option>
+                <option value="N4">N4</option>
+                <option value="N5">N5</option>
             </select>
+        </div>
+    </section>
+
+    <!-- Current Residence Status -->
+    <section class="form-section">
+        <h2>4. 在留資格 (Tư cách lưu trú)</h2>
+        <div class="form-group">
+            <label for="residence_type">居住状況の種類 (Loại tư cách lưu trú) *</label>
+            <input type="text" id="residence_type" name="residence_type" required>
+        </div>
+        <div class="form-group">
+            <label for="residence_expiry">居住許可期限 (Thời hạn lưu trú) *</label>
+            <input type="date" id="residence_expiry" name="residence_expiry" required>
+        </div>
+    </section>
+
+    <!-- Technical Intern History -->
+    <section class="form-section">
+        <h2>5. 技能実習生としての日本滞在歴 (Kinh nghiệm thực tập kỹ năng tại Nhật)</h2>
+        <div class="intern-history">
+            <div class="form-group">
+                <label for="intern_year">年 (Năm)</label>
+                <input type="number" id="intern_year" name="intern_year">
+            </div>
+            <div class="form-group">
+                <label for="intern_month">月 (Tháng)</label>
+                <input type="number" id="intern_month" name="intern_month" min="1" max="12">
+            </div>
+            <div class="form-group">
+                <label for="intern_status">居住状況 (Tình trạng lưu trú)</label>
+                <input type="text" id="intern_status" name="intern_status">
+            </div>
+            <div class="form-group">
+                <label for="affiliated_org">関連組織 (Tổ chức liên kết)</label>
+                <input type="text" id="affiliated_org" name="affiliated_org">
+            </div>
+            <div class="form-group">
+                <label for="managing_org">管理組織 (Tổ chức quản lý)</label>
+                <input type="text" id="managing_org" name="managing_org">
+            </div>
+        </div>
+    </section>
+
+    <!-- Relatives in Japan -->
+    <section class="form-section">
+        <h2>6. 日本在住の親族 (Người thân đang sống tại Nhật)</h2>
+        <div class="form-group">
+            <label>日本に親族がいますか？ (Bạn có người thân ở Nhật không?)</label>
+            <div class="radio-group">
+                <input type="radio" id="relatives_yes" name="relatives_japan" value="yes">
+                <label for="relatives_yes">Có</label>
+                <input type="radio" id="relatives_no" name="relatives_japan" value="no">
+                <label for="relatives_no">Không</label>
+            </div>
+        </div>
+
+        <div class="relatives-details" id="relativesDetails">
+            <div class="form-group">
+                <label>一緒に住んでいますか？ (Có sống cùng không?)</label>
+                <div class="radio-group">
+                    <input type="radio" id="living_together_yes" name="living_together" value="yes">
+                    <label for="living_together_yes">Có</label>
+                    <input type="radio" id="living_together_no" name="living_together" value="no">
+                    <label for="living_together_no">Không</label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="relative_relationship">関係 (Quan hệ)</label>
+                <input type="text" id="relative_relationship" name="relative_relationship">
+            </div>
+            <div class="form-group">
+                <label for="relative_name">名前 (Họ tên)</label>
+                <input type="text" id="relative_name" name="relative_name">
+            </div>
+            <div class="form-group">
+                <label for="relative_dob">生年月日 (Ngày tháng năm sinh)</label>
+                <input type="date" id="relative_dob" name="relative_dob">
+            </div>
+            <div class="form-group">
+                <label for="relative_work">仕事 / 学校 (Công việc / Trường học)</label>
+                <input type="text" id="relative_work" name="relative_work">
+            </div>
+        </div>
+    </section>
+
+    <!-- Home Country Information -->
+    <section class="form-section">
+        <h2>7. 本国の情報 (Thông tin quê hương)</h2>
+        <div class="emergency-contact">
+            <h3>緊急連絡先 (Liên hệ khẩn cấp)</h3>
+            <div class="form-group">
+                <label for="emergency_relationship">関係 (Quan hệ) *</label>
+                <input type="text" id="emergency_relationship" name="emergency_relationship" required>
+            </div>
+            <div class="form-group">
+                <label for="emergency_name">名前 (Họ tên) *</label>
+                <input type="text" id="emergency_name" name="emergency_name" required>
+            </div>
+            <div class="form-group">
+                <label for="emergency_address">住所 (Địa chỉ) *</label>
+                <textarea id="emergency_address" name="emergency_address" required></textarea>
+            </div>
+            <div class="form-group">
+                <label for="emergency_contact">連絡先 (Số điện thoại) *</label>
+                <input type="tel" id="emergency_contact" name="emergency_contact" required>
+            </div>
+        </div>
+    </section>
+
+    <!-- Health Condition -->
+    <section class="form-section">
+        <h2>8. 健康状態 (Tình trạng sức khỏe)</h2>
+        <div class="form-group">
+            <label>怪我や病気、手術を受けたことがありますか？ (Bạn đã từng bị thương, bệnh tật hoặc phẫu thuật chưa?)</label>
+            <div class="radio-group">
+                <input type="radio" id="health_yes" name="health_issues" value="yes">
+                <label for="health_yes">Có</label>
+                <input type="radio" id="health_no" name="health_issues" value="no">
+                <label for="health_no">Không</label>
+            </div>
+        </div>
+        <div class="form-group" id="healthDetails">
+            <label for="health_description">「はい」の場合、状態を説明してください (Nếu có, vui lòng mô tả chi tiết):</label>
+            <textarea id="health_description" name="health_description" 
+                      placeholder="Chi tiết về thương tích, bệnh viện, phẫu thuật"></textarea>
+        </div>
+    </section>
+
+    <!-- Allergies -->
+    <section class="form-section">
+        <h2>9. アレルギー (Dị ứng)</h2>
+        <p class="notice">命に関わる可能性があるため、正直に答えてください。アレルギーの有無は選考に影響しません。
+        (Vui lòng trả lời trung thực vì có thể liên quan đến tính mạng.
+        Việc có hay không có dị ứng sẽ không ảnh hưởng đến việc tuyển chọn.)</p>
+
+        <div class="form-group">
+            <label>アレルギーがありますか？ (Bạn có bị dị ứng không?)</label>
+            <div class="radio-group">
+                <input type="radio" id="allergy_none" name="allergies" value="none">
+                <label for="allergy_none">Không</label>
+                <input type="radio" id="allergy_yes" name="allergies" value="yes">
+                <label for="allergy_yes">Có</label>
+            </div>
+        </div>
+
+        <div class="allergy-types" id="allergyDetails">
+            <div class="checkbox-group">
+                <input type="checkbox" id="medication" name="allergy_type" value="medication">
+                <label for="medication">Thuốc</label>
+
+                <input type="checkbox" id="food" name="allergy_type" value="food">
+                <label for="food">Thực phẩm</label>
+
+                <input type="checkbox" id="metal" name="allergy_type" value="metal">
+                <label for="metal">Kim loại</label>
+
+                <input type="checkbox" id="plant" name="allergy_type" value="plant">
+                <label for="plant">Thực vật</label>
+
+                <input type="checkbox" id="other" name="allergy_type" value="other">
+                <label for="other">Khác</label>
+            </div>
+            <div class="form-group">
+                <label for="allergy_names">アレルギーの名前 (Tên các dị ứng):</label>
+                <textarea id="allergy_names" name="allergy_names" 
+                          placeholder="Vui lòng liệt kê các dị ứng của bạn"></textarea>
+            </div>
+        </div>
+    </section>
+
+    <!-- Other Confirmations -->
+    <section class="form-section">
+        <h2>10. その他の確認事項 (Các xác nhận khác)</h2>
+        
+        <!-- Smoking -->
+        <div class="form-group">
+            <label>あなたは吸っていますか？ (Bạn có hút thuốc không?)</label>
+            <div class="radio-group">
+                <input type="radio" id="smoke_yes" name="smoking" value="yes">
+                <label for="smoke_yes">Có</label>
+                <input type="radio" id="smoke_no" name="smoking" value="no">
+                <label for="smoke_no">Không</label>
+            </div>
+        </div>
+        <div class="form-group" id="smokingDetails">
+            <label for="cigarettes_per_day">「はい」の場合、1日何本ですか (Nếu có, bao nhiêu điếu một ngày?):</label>
+            <input type="number" id="cigarettes_per_day" name="cigarettes_per_day" min="0">
+        </div>
+
+        <!-- Alcohol -->
+        <div class="form-group">
+            <label>あなたはアルコールを飲みますか？ (Bạn có uống rượu bia không?)</label>
+            <div class="radio-group">
+                <input type="radio" id="alcohol_yes" name="alcohol" value="yes">
+                <label for="alcohol_yes">Có</label>
+                <input type="radio" id="alcohol_no" name="alcohol" value="no">
+                <label for="alcohol_no">Không</label>
+                <input type="radio" id="alcohol_little" name="alcohol" value="little">
+                <label for="alcohol_little">Một chút</label>
+            </div>
+        </div>
+
+        <!-- Bicycle -->
+        <div class="form-group">
+            <label>あなたは自転車をこぐことができますか？ (Bạn có biết đi xe đạp không?)</label>
+            <div class="radio-group">
+                <input type="radio" id="bicycle_yes" name="can_ride_bicycle" value="yes">
+                <label for="bicycle_yes">Có</label>
+                <input type="radio" id="bicycle_no" name="can_ride_bicycle" value="no">
+                <label for="bicycle_no">Không</label>
+            </div>
+        </div>
+
+        <!-- Self PR -->
+        <div class="form-group">
+            <label for="self_pr">自己PR・趣味・特技 (Giới thiệu bản thân / Sở thích / Kỹ năng):</label>
+            <textarea id="self_pr" name="self_pr"></textarea>
+        </div>
+
+        <!-- Physical Information -->
+        <div class="physical-info">
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="height">身長 (Chiều cao) (cm):</label>
+                    <input type="number" id="height" name="height" step="0.1">
+                </div>
+                <div class="form-group">
+                    <label for="weight">体重 (Cân nặng) (kg):</label>
+                    <input type="number" id="weight" name="weight" step="0.1">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="shoe_size">シューズサイズ (Size giày):</label>
+                    <input type="text" id="shoe_size" name="shoe_size">
+                </div>
+                <div class="form-group">
+                    <label for="clothing_size">服のサイズ (Size quần áo):</label>
+                    <input type="text" id="clothing_size" name="clothing_size">
+                </div>
+                <div class="form-group">
+                    <label for="blood_type">血液型 (Nhóm máu):</label>
+                    <select id="blood_type" name="blood_type">
+                        <option value="">Chọn</option>
+                        <option value="A">A</option>
+                        <option value="B">B</option>
+                        <option value="O">O</option>
+                        <option value="AB">AB</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="upper_size">上のサイズ (Size áo):</label>
+                    <input type="text" id="upper_size" name="upper_size">
+                </div>
+                <div class="form-group">
+                    <label for="lower_size">下のサイズ (Size quần):</label>
+                    <input type="text" id="lower_size" name="lower_size">
+                </div>
+                <div class="form-group">
+                    <label for="waist">ウエスト (Vòng eo):</label>
+                    <input type="text" id="waist" name="waist">
+                </div>
+            </div>
+        </div>
+
+        <!-- Remarks -->
+        <div class="form-group">
+            <label for="remarks">備考 (Ghi chú):</label>
+            <textarea id="remarks" name="remarks"></textarea>
+        </div>
+
+        <!-- Created Date -->
+        <div class="form-group">
+            <label for="created_date">作成日 (Ngày lập):</label>
+            <input type="date" id="created_date" name="created_date" 
+                   value="{% now 'Y-m-d' %}" required>
         </div>
     </section>
 
     <!-- Submit Button -->
     <section class="form-section submit-section">
-        <button type="submit" class="submit-btn">Gửi</button>
+        <button type="submit" class="submit-btn">Gửi đơn</button>
     </section>
 {% endblock %}
+

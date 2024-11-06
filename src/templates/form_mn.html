@@ -1,84 +1,503 @@
 {% extends "form_base.html" %}
 
-{% block title %}HR Ажилд авах систем{% endblock %}
-
-{% block modal_title %}Баталгаажуулах{% endblock %}
-{% block confirm_button %}Батлах{% endblock %}
-{% block cancel_button %}Цуцлах{% endblock %}
+{% block title %}Personal Survey Form (Анкет){% endblock %}
 
 {% block content %}
+    <!-- Declaration -->
+    <div class="form-notice">
+        <p>申告内容に嘘や誤りがないことを確認します。虚偽が発覚した場合はいかなる処分も受け入れます。
+        (Би энэхүү анкетын агуулгад худал мэдээлэл, алдаа байхгүй гэдгийг баталж байна. 
+        Хэрэв худал мэдээлэл илэрвэл аливаа хариуцлагыг хүлээх болно.)</p>
+    </div>
+
     <!-- Basic Information -->
     <section class="form-section">
-        <h2>Үндсэн мэдээлэл</h2>
-        
-        <!-- Name Fields -->
+        <h2>基本情報 (Үндсэн мэдээлэл)</h2>
         <div class="form-group">
-            <label>Овог (Ромажи) *</label>
-            <input type="text" name="surname_romaji" required>
+            <label for="name">氏名 (Овог нэр) *</label>
+            <input type="text" id="name" name="name" required>
         </div>
         <div class="form-group">
-            <label>Нэр (Ромажи) *</label>
-            <input type="text" name="givenname_romaji" required>
+            <label for="furigana">フリガナ (Нэрийн галиг)</label>
+            <input type="text" id="furigana" name="furigana">
         </div>
-
-        <!-- Email -->
         <div class="form-group">
-            <label>И-мэйл хаяг *</label>
-            <input type="email" name="email" required>
+            <label for="romaji">ローマ字 (Ром үсгээр) *</label>
+            <input type="text" id="romaji" name="romaji" required>
         </div>
-
-        <!-- Birth Date -->
-        <div class="form-group">
-            <label>Төрсөн огноо *</label>
-            <input type="date" name="birthdate" required>
+        <div class="form-row">
+            <div class="form-group">
+                <label for="dob">生年月日 (Төрсөн он сар өдөр) *</label>
+                <input type="date" id="dob" name="dob" required>
+            </div>
+            <div class="form-group">
+                <label for="age">年齢 (Нас) *</label>
+                <input type="number" id="age" name="age" required>
+            </div>
         </div>
-
-        <!-- Gender -->
         <div class="form-group">
-            <label>Хүйс *</label>
-            <select name="gender" required>
-                <option value="">Сонгоно уу</option>
-                <option value="male">Эрэгтэй</option>
-                <option value="female">Эмэгтэй</option>
+            <label for="gender">性別 (Хүйс) *</label>
+            <select id="gender" name="gender" required>
+                <option value="">選択 (Сонгох)</option>
+                <option value="male">男性 (Эрэгтэй)</option>
+                <option value="female">女性 (Эмэгтэй)</option>
             </select>
         </div>
-
-        <!-- Nationality -->
         <div class="form-group">
-            <label>Иргэншил *</label>
-            <select name="nationality" required>
-                <option value="">Сонгоно уу</option>
-                <option value="Mongolia">Монгол</option>
-                <option value="Vietnam">Вьетнам</option>
-                <option value="Other">Бусад</option>
-            </select>
+            <label for="family">家族構成 (Гэр бүлийн байдал)</label>
+            <textarea id="family" name="family_structure"></textarea>
         </div>
-
-        <!-- Phone -->
         <div class="form-group">
-            <label>Утасны дугаар *</label>
-            <input type="tel" name="mobile_phone" required>
+            <label for="nationality">国籍 (Иргэншил) *</label>
+            <input type="text" id="nationality" name="nationality" required>
+        </div>
+        <div class="form-group">
+            <label for="station">最寄駅 (Ойрын галт тэрэгний буудал)</label>
+            <input type="text" id="station" name="nearest_station">
+        </div>
+        <div class="form-group">
+            <label for="address">現住所 (Оршин суугаа хаяг) 〒</label>
+            <input type="text" id="postal" name="postal_code" placeholder="郵便番号 (Шуудангийн дугаар)">
+            <textarea id="address" name="address"></textarea>
         </div>
     </section>
 
-    <!-- Japanese Level -->
+    <!-- Contact Information -->
     <section class="form-section">
-        <h2>Япон хэлний түвшин</h2>
+        <h2>連絡先 (Холбоо барих мэдээлэл)</h2>
         <div class="form-group">
-            <label>Япон хэлний түвшин *</label>
-            <select name="japanese_level" required>
-                <option value="">Сонгоно уу</option>
-                <option value="n1">N1</option>
-                <option value="n2">N2</option>
-                <option value="n3">N3</option>
-                <option value="n4">N4</option>
-                <option value="n5">N5</option>
+            <label for="mobile">携帯電話 (Гар утас) *</label>
+            <input type="tel" id="mobile" name="mobile_phone" required>
+        </div>
+        <div class="form-group">
+            <label for="email">メールアドレス (И-мэйл хаяг) *</label>
+            <input type="email" id="email" name="email" required>
+        </div>
+        <div class="form-group">
+            <label for="facebook">Facebook (Фэйсбүүк)</label>
+            <input type="text" id="facebook" name="facebook">
+        </div>
+        <div class="form-group">
+            <label for="line">LINE (Лайн)</label>
+            <input type="text" id="line" name="line">
+        </div>
+        <div class="form-group">
+            <label for="page">Page Name (Хуудасны нэр)</label>
+            <input type="text" id="page" name="page_name">
+        </div>
+    </section>
+
+    <!-- Interview Availability -->
+    <section class="form-section">
+        <h2>面接可能時間 (Ярилцлагын боломжтой цаг)</h2>
+        <div class="form-group">
+            <label for="choice1">1番目の選択 (1-р сонголт) *</label>
+            <input type="datetime-local" id="choice1" name="interview_choice1" required>
+        </div>
+        <div class="form-group">
+            <label for="choice2">2番目の選択 (2-р сонголт)</label>
+            <input type="datetime-local" id="choice2" name="interview_choice2">
+        </div>
+        <div class="form-group">
+            <label for="choice3">3番目の選択 (3-р сонголт)</label>
+            <input type="datetime-local" id="choice3" name="interview_choice3">
+        </div>
+        <div class="form-group">
+            <label for="resignation">予期退職日 (Ажлаас гарах төлөвлөсөн өдөр)</label>
+            <input type="date" id="resignation" name="expected_resignation_date">
+        </div>
+        <div class="form-group">
+            <label for="jobchange">予期職務変更日 (Ажил өөрчлөх төлөвлөсөн өдөр)</label>
+            <input type="date" id="jobchange" name="expected_job_change_date">
+        </div>
+        <div class="form-group">
+            <label for="salary">月給 技術職員として (Техникийн ажилтны сарын цалин)</label>
+            <input type="number" id="salary" name="monthly_salary">
+        </div>
+    </section>
+
+    <!-- Education -->
+    <section class="form-section">
+        <h2>1. 学歴 (Боловсрол)</h2>
+        <div class="education-entry">
+            <div class="form-group">
+                <label for="enroll">入学日 (Элссэн огноо) *</label>
+                <input type="date" id="enroll" name="enrollment_date" required>
+            </div>
+            <div class="form-group">
+                <label for="graduate">卒業日 (Төгссөн огноо) *</label>
+                <input type="date" id="graduate" name="graduation_date" required>
+            </div>
+            <div class="form-group">
+                <label for="school">学校名 (Сургуулийн нэр) *</label>
+                <input type="text" id="school" name="school_name" required>
+            </div>
+            <div class="form-group">
+                <label for="department">学科 (Мэргэжил)</label>
+                <input type="text" id="department" name="department">
+            </div>
+        </div>
+        <button type="button" class="add-more">+ Боловсрол нэмэх</button>
+    </section>
+
+    <!-- Employment History -->
+    <section class="form-section">
+        <h2>2. 職歴 (Ажлын туршлага)</h2>
+        <div class="employment-entry">
+            <div class="form-group">
+                <label for="join_date">入社日 (Ажилд орсон огноо) *</label>
+                <input type="date" id="join_date" name="joining_date" required>
+            </div>
+            <div class="form-group">
+                <label for="resign_date">退職日 (Ажлаас гарсан огноо) *</label>
+                <input type="date" id="resign_date" name="resignation_date" required>
+            </div>
+            <div class="form-group">
+                <label for="company">会社名 (Копанийн нэр) *</label>
+                <input type="text" id="company" name="company_name" required>
+            </div>
+            <div class="form-group">
+                <label for="job_desc">職務内容 / 退職理由 (Ажлын чиг үүрэг / Ажлаас гарсан шалтгаан)</label>
+                <textarea id="job_desc" name="job_description"></textarea>
+            </div>
+        </div>
+        <button type="button" class="add-more">+ Ажлын туршлага нэмэх</button>
+    </section>
+
+    <!-- Qualifications -->
+    <section class="form-section">
+        <h2>3. 資格 (Мэргэшил)</h2>
+        <div class="form-group">
+            <label for="qualification">資格 / 免許 (Мэргэшил / Үнэмлэх)</label>
+            <input type="text" id="qualification" name="qualification">
+        </div>
+        <div class="form-group">
+            <label for="qual_details">詳細 (Дэлгэрэнгүй)</label>
+            <textarea id="qual_details" name="qualification_details"></textarea>
+        </div>
+
+        <!-- Driver's Licenses -->
+        <div class="form-group">
+            <label>日本の運転免許 (Японы жолооны үнэмлэх) (AT)</label>
+            <div class="radio-group">
+                <input type="radio" id="jp_license_yes" name="jp_license" value="yes">
+                <label for="jp_license_yes">Тийм</label>
+                <input type="radio" id="jp_license_no" name="jp_license" value="no">
+                <label for="jp_license_no">Үгүй</label>
+            </div>
+        </div>
+        <div class="form-group">
+            <label>モンゴルの運転免許 (Монголын жолооны үнэмлэх)</label>
+            <div class="radio-group">
+                <input type="radio" id="mn_license_yes" name="mn_license" value="yes">
+                <label for="mn_license_yes">Тийм</label>
+                <input type="radio" id="mn_license_no" name="mn_license" value="no">
+                <label for="mn_license_no">Үгүй</label>
+            </div>
+        </div>
+        <div class="form-group">
+            <label>ベトナムの運転免許 (Вьетнамын жолооны үнэмлэх)</label>
+            <div class="radio-group">
+                <input type="radio" id="vn_license_yes" name="vn_license" value="yes">
+                <label for="vn_license_yes">Тийм</label>
+                <input type="radio" id="vn_license_no" name="vn_license" value="no">
+                <label for="vn_license_no">Үгүй</label>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="jp_prof">日本語能力 (Япон хэлний түвшин)</label>
+            <select id="jp_prof" name="japanese_proficiency">
+                <option value="">Түвшин сонгох</option>
+                <option value="N1">N1</option>
+                <option value="N2">N2</option>
+                <option value="N3">N3</option>
+                <option value="N4">N4</option>
+                <option value="N5">N5</option>
             </select>
+        </div>
+    </section>
+
+    <!-- Current Residence Status -->
+    <section class="form-section">
+        <h2>4. 在留資格 (Оршин суух зөвшөөрөл)</h2>
+        <div class="form-group">
+            <label for="residence_type">居住状況の種類 (Оршин суух зөвшөөрлийн төрөл) *</label>
+            <input type="text" id="residence_type" name="residence_type" required>
+        </div>
+        <div class="form-group">
+            <label for="residence_expiry">居住許可期限 (Оршин суух зөвшөөрлийн хугацаа) *</label>
+            <input type="date" id="residence_expiry" name="residence_expiry" required>
+        </div>
+    </section>
+
+    <!-- Technical Intern History -->
+    <section class="form-section">
+        <h2>5. 技能実習生としての日本滞在歴 (Дадлагажигчаар Японд ажилласан туршлага)</h2>
+        <div class="intern-history">
+            <div class="form-group">
+                <label for="intern_year">年 (Он)</label>
+                <input type="number" id="intern_year" name="intern_year">
+            </div>
+            <div class="form-group">
+                <label for="intern_month">月 (Сар)</label>
+                <input type="number" id="intern_month" name="intern_month" min="1" max="12">
+            </div>
+            <div class="form-group">
+                <label for="intern_status">居住状況 (Оршин суух байдал)</label>
+                <input type="text" id="intern_status" name="intern_status">
+            </div>
+            <div class="form-group">
+                <label for="affiliated_org">関連組織 (Харьяа байгууллага)</label>
+                <input type="text" id="affiliated_org" name="affiliated_org">
+            </div>
+            <div class="form-group">
+                <label for="managing_org">管理組織 (Удирдах байгууллага)</label>
+                <input type="text" id="managing_org" name="managing_org">
+            </div>
+        </div>
+    </section>
+
+    <!-- Relatives in Japan -->
+    <section class="form-section">
+        <h2>6. 日本在住の親族 (Японд амьдардаг төрөл садан)</h2>
+        <div class="form-group">
+            <label>日本に親族がいますか？ (Японд төрөл садан байгаа юу?)</label>
+            <div class="radio-group">
+                <input type="radio" id="relatives_yes" name="relatives_japan" value="yes">
+                <label for="relatives_yes">Тийм</label>
+                <input type="radio" id="relatives_no" name="relatives_japan" value="no">
+                <label for="relatives_no">Үгүй</label>
+            </div>
+        </div>
+
+        <div class="relatives-details" id="relativesDetails">
+            <div class="form-group">
+                <label>一緒に住んでいますか？ (Хамт амьдардаг уу?)</label>
+                <div class="radio-group">
+                    <input type="radio" id="living_together_yes" name="living_together" value="yes">
+                    <label for="living_together_yes">Тийм</label>
+                    <input type="radio" id="living_together_no" name="living_together" value="no">
+                    <label for="living_together_no">Үгүй</label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="relative_relationship">関係 (Хамаарал)</label>
+                <input type="text" id="relative_relationship" name="relative_relationship">
+            </div>
+            <div class="form-group">
+                <label for="relative_name">名前 (Нэр)</label>
+                <input type="text" id="relative_name" name="relative_name">
+            </div>
+            <div class="form-group">
+                <label for="relative_dob">生年月日 (Төрсөн он сар өдөр)</label>
+                <input type="date" id="relative_dob" name="relative_dob">
+            </div>
+            <div class="form-group">
+                <label for="relative_work">仕事 / 学校 (Ажил / Сургууль)</label>
+                <input type="text" id="relative_work" name="relative_work">
+            </div>
+        </div>
+    </section>
+
+    <!-- Home Country Information -->
+    <section class="form-section">
+        <h2>7. 本国の情報 (Эх орны мэдээлэл)</h2>
+        <div class="emergency-contact">
+            <h3>緊急連絡先 (Яаралтай үед холбоо барих)</h3>
+            <div class="form-group">
+                <label for="emergency_relationship">関係 (Хамаарал) *</label>
+                <input type="text" id="emergency_relationship" name="emergency_relationship" required>
+            </div>
+            <div class="form-group">
+                <label for="emergency_name">名前 (Нэр) *</label>
+                <input type="text" id="emergency_name" name="emergency_name" required>
+            </div>
+            <div class="form-group">
+                <label for="emergency_address">住所 (Хаяг) *</label>
+                <textarea id="emergency_address" name="emergency_address" required></textarea>
+            </div>
+            <div class="form-group">
+                <label for="emergency_contact">連絡先 (Холбоо барих дугаар) *</label>
+                <input type="tel" id="emergency_contact" name="emergency_contact" required>
+            </div>
+        </div>
+    </section>
+
+    <!-- Health Condition -->
+    <section class="form-section">
+        <h2>8. 健康状態 (Эрүүл мэндийн байдал)</h2>
+        <div class="form-group">
+            <label>怪我や病気、手術を受けたことがありますか？ (Гэмтэл, өвчин, мэс засал хийлгэж байсан уу?)</label>
+            <div class="radio-group">
+                <input type="radio" id="health_yes" name="health_issues" value="yes">
+                <label for="health_yes">Тийм</label>
+                <input type="radio" id="health_no" name="health_issues" value="no">
+                <label for="health_no">Үгүй</label>
+            </div>
+        </div>
+        <div class="form-group" id="healthDetails">
+            <label for="health_description">「はい」の場合、状態を説明してください (Хэрэв тийм бол, дэлгэрэнгүй тайлбарлана уу):</label>
+            <textarea id="health_description" name="health_description" 
+                      placeholder="Гэмтэл, эмнэлэг, мэс засал зэргийн талаар"></textarea>
+        </div>
+    </section>
+
+    <!-- Allergies -->
+    <section class="form-section">
+        <h2>9. アレルギー (Харшил)</h2>
+        <p class="notice">命に関わる可能性があるため、正直に答えてください。アレルギーの有無は選考に影響しません。
+        (Амь насанд аюултай байж болзошгүй тул үнэн зөв хариулна уу. 
+        Харшилтай эсэх нь сонгон шалгаруулалтад нөлөөлөхгүй.)</p>
+
+        <div class="form-group">
+            <label>アレルギーがありますか？ (Харшил байгаа юу?)</label>
+            <div class="radio-group">
+                <input type="radio" id="allergy_none" name="allergies" value="none">
+                <label for="allergy_none">Байхгүй</label>
+                <input type="radio" id="allergy_yes" name="allergies" value="yes">
+                <label for="allergy_yes">Тийм</label>
+            </div>
+        </div>
+
+        <div class="allergy-types" id="allergyDetails">
+            <div class="checkbox-group">
+                <input type="checkbox" id="medication" name="allergy_type" value="medication">
+                <label for="medication">Эм (Medication)</label>
+
+                <input type="checkbox" id="food" name="allergy_type" value="food">
+                <label for="food">Хоол хүнс (Food)</label>
+
+                <input type="checkbox" id="metal" name="allergy_type" value="metal">
+                <label for="metal">Төмөр (Metal)</label>
+
+                <input type="checkbox" id="plant" name="allergy_type" value="plant">
+                <label for="plant">Ургамал (Plant)</label>
+
+                <input type="checkbox" id="other" name="allergy_type" value="other">
+                <label for="other">Бусад (Other)</label>
+            </div>
+            <div class="form-group">
+                <label for="allergy_names">アレルギーの名前 (Харшлын нэр):</label>
+                <textarea id="allergy_names" name="allergy_names" 
+                          placeholder="Харшил өгдөг зүйлсээ жагсаан бичнэ үү"></textarea>
+            </div>
+        </div>
+    </section>
+
+    <!-- Other Confirmations -->
+    <section class="form-section">
+        <h2>10. その他の確認事項 (Бусад баталгаажуулалт)</h2>
+        
+        <!-- Smoking -->
+        <div class="form-group">
+            <label>あなたは吸っていますか？ (Та тамхи татдаг уу?)</label>
+            <div class="radio-group">
+                <input type="radio" id="smoke_yes" name="smoking" value="yes">
+                <label for="smoke_yes">Тийм</label>
+                <input type="radio" id="smoke_no" name="smoking" value="no">
+                <label for="smoke_no">Үгүй</label>
+            </div>
+        </div>
+        <div class="form-group" id="smokingDetails">
+            <label for="cigarettes_per_day">「はい」の場合、1日何本ですか (Хэрэв тийм бол, өдөрт хэд татдаг вэ?):</label>
+            <input type="number" id="cigarettes_per_day" name="cigarettes_per_day" min="0">
+        </div>
+
+        <!-- Alcohol -->
+        <div class="form-group">
+            <label>あなたはアルコールを飲みますか？ (Та согтууруулах ундаа хэрэглэдэг үү?)</label>
+            <div class="radio-group">
+                <input type="radio" id="alcohol_yes" name="alcohol" value="yes">
+                <label for="alcohol_yes">Тийм</label>
+                <input type="radio" id="alcohol_no" name="alcohol" value="no">
+                <label for="alcohol_no">Үгүй</label>
+                <input type="radio" id="alcohol_little" name="alcohol" value="little">
+                <label for="alcohol_little">Бага зэрэг</label>
+            </div>
+        </div>
+
+        <!-- Bicycle -->
+        <div class="form-group">
+            <label>あなたは自転車をこぐことができますか？ (Та дугуй унаж чаддаг уу?)</label>
+            <div class="radio-group">
+                <input type="radio" id="bicycle_yes" name="can_ride_bicycle" value="yes">
+                <label for="bicycle_yes">Тийм</label>
+                <input type="radio" id="bicycle_no" name="can_ride_bicycle" value="no">
+                <label for="bicycle_no">Үгүй</label>
+            </div>
+        </div>
+
+        <!-- Self PR -->
+        <div class="form-group">
+            <label for="self_pr">自己PR・趣味・特技 (Өөрийгөө танилцуулга / Хобби / Авьяас):</label>
+            <textarea id="self_pr" name="self_pr"></textarea>
+        </div>
+
+        <!-- Physical Information -->
+        <div class="physical-info">
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="height">身長 (Өндөр) (cm):</label>
+                    <input type="number" id="height" name="height" step="0.1">
+                </div>
+                <div class="form-group">
+                    <label for="weight">体重 (Жин) (kg):</label>
+                    <input type="number" id="weight" name="weight" step="0.1">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="shoe_size">シューズサイズ (Гутлын размер):</label>
+                    <input type="text" id="shoe_size" name="shoe_size">
+                </div>
+                <div class="form-group">
+                    <label for="clothing_size">服のサイズ (Хувцасны размер):</label>
+                    <input type="text" id="clothing_size" name="clothing_size">
+                </div>
+                <div class="form-group">
+                    <label for="blood_type">血液型 (Цусны бүлэг):</label>
+                    <select id="blood_type" name="blood_type">
+                        <option value="">Сонгох</option>
+                        <option value="A">A</option>
+                        <option value="B">B</option>
+                        <option value="O">O</option>
+                        <option value="AB">AB</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="upper_size">上のサイズ (Дээд хэсгийн размер):</label>
+                    <input type="text" id="upper_size" name="upper_size">
+                </div>
+                <div class="form-group">
+                    <label for="lower_size">下のサイズ (Доод хэсгийн размер):</label>
+                    <input type="text" id="lower_size" name="lower_size">
+                </div>
+                <div class="form-group">
+                    <label for="waist">ウエスト (Бүсэлхий):</label>
+                    <input type="text" id="waist" name="waist">
+                </div>
+            </div>
+        </div>
+
+        <!-- Remarks -->
+        <div class="form-group">
+            <label for="remarks">備考 (Тайлбар):</label>
+            <textarea id="remarks" name="remarks"></textarea>
+        </div>
+
+        <!-- Created Date -->
+        <div class="form-group">
+            <label for="created_date">作成日 (Бөглөсөн огноо):</label>
+            <input type="date" id="created_date" name="created_date" 
+                   value="{% now 'Y-m-d' %}" required>
         </div>
     </section>
 
     <!-- Submit Button -->
     <section class="form-section submit-section">
-        <button type="submit" class="submit-btn">Илгээх</button>
+        <button type="submit" class="submit-btn">Анкет илгээх</button>
     </section>
 {% endblock %}
+
