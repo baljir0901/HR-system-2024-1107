@@ -8,23 +8,12 @@
 </head>
 <body>
     <div class="container">
-        <form id="recruitmentForm" enctype="multipart/form-data">
+        <form id="recruitmentForm" method="POST" action="{{ url_for('submit') }}" enctype="multipart/form-data">
+            {{ form.csrf_token }}
             {% block content %}{% endblock %}
+            <button type="submit">Submit</button>
         </form>
     </div>
-
-    <!-- Review Modal -->
-    <div id="reviewModal" class="modal">
-        <div class="modal-content">
-            <h2>{% block modal_title %}Confirm{% endblock %}</h2>
-            <div id="reviewContent"></div>
-            <div class="modal-buttons">
-                <button id="confirmSubmit">{% block confirm_button %}Confirm{% endblock %}</button>
-                <button id="cancelSubmit">{% block cancel_button %}Cancel{% endblock %}</button>
-            </div>
-        </div>
-    </div>
-
     <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 </body>
 </html>
