@@ -2,72 +2,72 @@
 
 {% block title %}HR Recruitment System{% endblock %}
 
-{% block modal_title %}Confirm{% endblock %}
-{% block confirm_button %}Confirm{% endblock %}
-{% block cancel_button %}Cancel{% endblock %}
+{% block modal_title %}確認 (Confirm){% endblock %}
+{% block confirm_button %}確認 (Confirm){% endblock %}
+{% block cancel_button %}キャンセル (Cancel){% endblock %}
 
 {% block content %}
     <!-- Basic Information -->
     <section class="form-section">
-        <h2>Basic Information</h2>
+        <h2>基本情報 (Basic Information)</h2>
         
         <!-- Name Fields -->
         <div class="form-group">
-            <label>Surname (Romaji) *</label>
+            <label>姓 - ローマ字 (Surname - Romaji) *</label>
             <input type="text" name="surname_romaji" required>
         </div>
         <div class="form-group">
-            <label>Given Name (Romaji) *</label>
+            <label>名 - ローマ字 (Given Name - Romaji) *</label>
             <input type="text" name="givenname_romaji" required>
         </div>
 
         <!-- Email -->
         <div class="form-group">
-            <label>Email Address *</label>
+            <label>メールアドレス (Email Address) *</label>
             <input type="email" name="email" required>
         </div>
 
         <!-- Birth Date -->
         <div class="form-group">
-            <label>Date of Birth *</label>
+            <label>生年月日 (Date of Birth) *</label>
             <input type="date" name="birthdate" required>
         </div>
 
         <!-- Gender -->
         <div class="form-group">
-            <label>Gender *</label>
+            <label>性別 (Gender) *</label>
             <select name="gender" required>
-                <option value="">Please select</option>
-                <option value="male">Male</option>
-                <option value="female">Female</option>
+                <option value="">選択してください (Please select)</option>
+                <option value="male">男性 (Male)</option>
+                <option value="female">女性 (Female)</option>
             </select>
         </div>
 
         <!-- Nationality -->
         <div class="form-group">
-            <label>Nationality *</label>
+            <label>国籍 (Nationality) *</label>
             <select name="nationality" required>
-                <option value="">Please select</option>
-                <option value="Mongolia">Mongolia</option>
-                <option value="Vietnam">Vietnam</option>
-                <option value="Other">Other</option>
+                <option value="">選択してください (Please select)</option>
+                <option value="Mongolia">モンゴル (Mongolia)</option>
+                <option value="Vietnam">ベトナム (Vietnam)</option>
+                <option value="Other">その他 (Other)</option>
             </select>
         </div>
 
         <!-- Phone -->
         <div class="form-group">
-            <label>Mobile Phone Number *</label>
+            <label>携帯電話番号 (Mobile Phone Number) *</label>
             <input type="tel" name="mobile_phone" required>
         </div>
     </section>
 
     <!-- Japanese Level -->
     <section class="form-section">
-        <h2>Japanese Language Proficiency</h2>
+        <h2>日本語能力 (Japanese Language Proficiency)</h2>
         <div class="form-group">
-            <label>Japanese Level *</label>
+            <label>日本語レベル (Japanese Level) *</label>
             <select name="japanese_level" required>
-                <option value="">Please select</option>
+                <option value="">選択してください (Please select)</option>
                 <option value="n1">N1</option>
                 <option value="n2">N2</option>
                 <option value="n3">N3</option>
@@ -79,6 +79,6 @@
 
     <!-- Submit Button -->
     <section class="form-section submit-section">
-        <button type="submit" class="submit-btn">Submit</button>
+        <button type="submit" class="submit-btn">送信 (Submit)</button>
     </section>
 {% endblock %}

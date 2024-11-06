@@ -1,82 +1,37 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Select Language / 言語選択 / Хэл сонгох / Chọn ngôn ngữ</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f0f2f5;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-        }
-        .container {
-            background: white;
-            padding: 2rem;
-            border-radius: 12px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            text-align: center;
-            max-width: 500px;
-            width: 90%;
-        }
-        h1 {
-            margin-bottom: 2rem;
-            color: #333;
-        }
-        .language-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 1rem;
-            margin: 0 auto;
-        }
-        .language-button {
-            background: #4a90e2;
-            color: white;
-            border: none;
-            padding: 1rem;
-            border-radius: 8px;
-            font-size: 1.1rem;
-            cursor: pointer;
-            transition: transform 0.3s ease, background 0.3s ease;
-        }
-        .language-button:hover {
-            background: #357abd;
-            transform: translateY(-2px);
-        }
-        .language-button img {
-            width: 30px;
-            height: 20px;
-            margin-right: 8px;
-            vertical-align: middle;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HR Recruitment System</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
 </head>
 <body>
-    <div class="container">
-        <h1>Please select your language<br>
-            言語を選択してください<br>
-            Хэл сонгоно уу<br>
-            Vui lòng chọn ngôn ngữ</h1>
-        
-        <div class="language-grid">
-            <a href="/form/ja" class="language-button">
-                🇯🇵 日本語
-            </a>
-            <a href="/form/en" class="language-button">
-                🇬🇧 English
-            </a>
-            <a href="/form/mn" class="language-button">
-                🇲🇳 Монгол
-            </a>
-            <a href="/form/vi" class="language-button">
-                🇻🇳 Tiếng Việt
-            </a>
-        </div>
+  <div class="container">
+    <div class="language-select">
+      <h1>
+        言語を選択してください<br>
+        Please select your language<br>
+      </h1>
+      <div class="language-grid">
+        <a href="{{ url_for('form', lang='ja') }}" class="language-button">
+          <span class="lang-name">日本語</span>
+          <span class="lang-native">Japanese</span>
+        </a>
+        <a href="{{ url_for('form', lang='en') }}" class="language-button">
+          <span class="lang-name">English</span>
+          <span class="lang-native">English</span>
+        </a>
+        <a href="{{ url_for('form', lang='mn') }}" class="language-button">
+          <span class="lang-name">Монгол</span>
+          <span class="lang-native">Mongolian</span>
+        </a>
+        <a href="{{ url_for('form', lang='vi') }}" class="language-button">
+          <span class="lang-name">Tiếng Việt</span>
+          <span class="lang-native">Vietnamese</span>
+        </a>
+      </div>
     </div>
+  </div>
 </body>
 </html>
